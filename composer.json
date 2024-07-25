@@ -1,24 +1,26 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "dev-deeper-online/laravel-zatca",
+    "description": "An unofficial Laravel package for generating ZATCA e-invoices, QR Codes, and submitting e-invoices to ZATCA's servers.",
     "keywords": [
-        ":vendor_name",
+        "DevDeeper",
         "laravel",
-        ":package_slug"
+        "laravel-zatca",
+        "zatca",
+        "e-invoice"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/dev-deeper-online/laravel-zatca",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "DevDeeper",
+            "email": "developers@devdeeper.online",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.2",
+        "php": "^8.0",
         "spatie/laravel-package-tools": "^1.16",
-        "illuminate/contracts": "^10.0||^11.0"
+        "illuminate/contracts": "^8.0|^9.0|^10.0|^11.0"
     },
     "require-dev": {
         "laravel/pint": "^1.14",
@@ -30,24 +32,23 @@
         "pestphp/pest-plugin-laravel": "^2.3",
         "phpstan/extension-installer": "^1.3",
         "phpstan/phpstan-deprecation-rules": "^1.1",
-        "phpstan/phpstan-phpunit": "^1.3",
-        "spatie/laravel-ray": "^1.35"
+        "phpstan/phpstan-phpunit": "^1.3"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "DevDeeper\\ZATCA\\": "src/",
+            "DevDeeper\\ZATCA\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "DevDeeper\\ZATCA\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
     "scripts": {
         "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "clear": "@php vendor/bin/testbench package:purge-laravel-zatca --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
             "@composer run prepare",
@@ -73,10 +74,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "DevDeeper\\ZATCA\\ZATCAServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "ZATCA": "DevDeeper\\ZATCA\\Facades\\ZATCA"
             }
         }
     },
