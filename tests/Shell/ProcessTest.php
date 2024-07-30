@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DevDeeper\ZATCA\Tests\Shell;
 
 use DevDeeper\ZATCA\Tests\TestCase;
@@ -11,5 +13,4 @@ class ProcessTest extends TestCase
     {
         $this->assertTrue(true);
     }
-
 }

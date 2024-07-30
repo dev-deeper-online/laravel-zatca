@@ -20,8 +20,7 @@ class CSR
         public Filesystem $files,
         public OpenSSLPemTemplate $pemTemplate,
         public CSRConfigTemplate $csrTemplate,
-    ) {
-    }
+    ) {}
 
     /**
      * Generate Base64 hash of the OpenSSl key.
