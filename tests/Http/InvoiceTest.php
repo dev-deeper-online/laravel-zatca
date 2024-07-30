@@ -1,12 +1,15 @@
 <?php
 
-namespace DevDeeper\ZATCA\Tests;
+namespace DevDeeper\ZATCA\Tests\Http;
 
-class ExampleTest extends TestCase
+use DevDeeper\ZATCA\Tests\TestCase;
+
+class InvoiceTest extends TestCase
 {
     /** @test */
     public function it_returns_true(): void
     {
         $this->assertTrue(true);
     }
+
 }

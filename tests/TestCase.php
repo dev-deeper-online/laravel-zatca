@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DevDeeper\ZATCA\Tests;
 
 use DevDeeper\ZATCA\ZATCAServiceProvider;
