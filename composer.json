@@ -42,6 +42,7 @@
         }
     },
     "scripts": {
+        "post-autoload-dump": "@composer run prepare",
         "clear": "@php vendor/bin/testbench package:purge-laravel-zatca --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
