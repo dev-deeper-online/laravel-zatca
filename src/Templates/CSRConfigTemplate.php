@@ -6,14 +6,9 @@ namespace DevDeeper\ZATCA\Templates;
 
 use DevDeeper\ZATCA\DTOs\CSROptions;
 use DevDeeper\ZATCA\Exceptions\InvalidModeException;
-use Illuminate\Filesystem\Filesystem;
 
-class CSRConfigTemplate
+class CSRConfigTemplate extends Template
 {
-    public function __construct(
-        protected Filesystem $files,
-    ) {}
-
     public function build(string $path, CSROptions $options): void
     {
         $stub = $this->files->get($this->getStub());
@@ -30,13 +25,12 @@ class CSRConfigTemplate
     {
         return str_replace([
             '{{ENVIRONMENT_MODE}}',
-            '{{SN}}',
-            '{{TITLE}}',
+            '{{SERIAL_NUMBER}}',
+            '{{INVOICE_TYPE}}',
             '{{COMMON_NAME}}',
-            '{{UID}}',
+            '{{VAT_REGISTRATION_NUMBER}}',
             '{{ORGANIZATION_NAME}}',
-            '{{ORGANIZATIONAL_UNIT_NAME}}',
-            '{{COUNTRY_NAME}}',
+            '{{ORGANIZATION_BRANCH_NAME}}',
             '{{REGISTERED_ADDRESS}}',
             '{{BUSINESS_CATEGORY}}',
         ], [
@@ -44,30 +38,19 @@ class CSRConfigTemplate
             ('1-'.$options->egs->solutionName.'|2-'.$options->egs->model.'|3-'.$options->egs->serialNumber),
             $options->invoiceType,
             $options->commonName,
-            $options->organization->identifier,
+            $options->organization->vat_registration_number,
             $options->organization->name,
-            $options->organization->unit,
-            $options->organization->country,
+            $options->organization->branch,
             $options->organization->address,
             $options->organization->category,
         ], $stub);
     }
 
     /**
-     * Get the stub file for the generator.
+     * {@inheritdoc}
      */
     protected function getStub(): string
     {
         return $this->resolveStubPath('/stubs/csr_config.stub');
-    }
-
-    /**
-     * Resolve the fully-qualified path to the stub.
-     */
-    protected function resolveStubPath(string $stub): string
-    {
-        return $this->files->exists($customPath = base_path(trim($stub, '/')))
-            ? $customPath
-            : __DIR__.'/../..'.$stub;
     }
 }

@@ -1,28 +1,49 @@
 # ------------------------------------------------------------------
-# Default section for "req" command csr_options
+# Default section for "req" command options
 # ------------------------------------------------------------------
 [req]
+
+# Password for reading in existing private key file
+# input_password = {{PRIVATE_KEY_PASS}}
+
+# Prompt for DN field values and CSR attributes in ASCII
 prompt = no
 utf8 = no
+
+# Section pointer for DN field options
 distinguished_name = my_req_dn_prompt
+
+# Extensions
 req_extensions = v3_req
 
-[v3_req]
-1.3.6.1.4.1.311.20.2 = ASN1:PRINTABLESTRING:{{ENVIRONMENT_MODE}}
+[ v3_req ]
+#basicConstraints=CA:FALSE
+#keyUsage = digitalSignature, keyEncipherment
+# Production or Testing Template (TSTZATCA-Code-Signing - ZATCA-Code-Signing)
+1.3.6.1.4.1.311.20.2 = ASN1:UTF8String:{{ENVIRONMENT_MODE}}
 subjectAltName=dirName:dir_sect
 
-[dir_sect]
-SN = {{SN}}
-UID = {{UID}}
-title = {{TITLE}}
+[ dir_sect ]
+# EGS Serial number (1-SolutionName|2-ModelOrVersion|3-serialNumber)
+SN = {{SERIAL_NUMBER}}
+# VAT Registration number of TaxPayer (Organization identifier [15 digits begins with 3 and ends with 3])
+UID = {{VAT_REGISTRATION_NUMBER}}
+# Invoice type (TSCZ)(1 = supported, 0 not supported) (Tax, Simplified, future use, future use)
+title = {{INVOICE_TYPE}}
+# Location (branch address or website)
 registeredAddress = {{REGISTERED_ADDRESS}}
+# Industry (industry sector name)
 businessCategory = {{BUSINESS_CATEGORY}}
 
 # ------------------------------------------------------------------
 # Section for prompting DN field values to create "subject"
 # ------------------------------------------------------------------
 [my_req_dn_prompt]
+# Common name (EGS TaxPayer PROVIDED ID [FREE TEXT])
 commonName = {{COMMON_NAME}}
-organizationalUnitName = {{ORGANIZATIONAL_UNIT_NAME}}
+# Organization Unit (Branch name)
+organizationalUnitName = {{ORGANIZATION_BRANCH_NAME}}
+# Organization name (Tax payer name)
 organizationName = {{ORGANIZATION_NAME}}
-countryName = {{COUNTRY_NAME}}
+# ISO2 country code is required with US as default
+countryName = SA

@@ -7,10 +7,9 @@ namespace DevDeeper\ZATCA\DTOs;
 class OrganizationData
 {
     public function __construct(
-        public string $identifier,
+        public string $vat_registration_number,
         public string $name,
-        public string $unit,
-        public string $country,
+        public string $branch,
         public string $address,
         public string $category,
     ) {}
