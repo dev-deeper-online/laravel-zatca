@@ -24,8 +24,8 @@
         "ext-openssl": "*"
     },
     "require-dev": {
-        "laravel/pint": "^1.14",
-        "nunomaduro/collision": "^8.1.1||^7.10.0",
+        "laravel/pint": "^1.14||^1.5",
+        "nunomaduro/collision": "^8.1.1||^7.10.0||^6.4.0||^5.11.0",
         "orchestra/testbench": "^9.0.0||^8.22.0||^6.45.0||^7.43.0",
         "phpunit/phpunit": "^10.5.17||^9.6.20||^8.5.21"
     },
