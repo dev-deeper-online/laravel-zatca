@@ -11,10 +11,18 @@ use DevDeeper\ZATCA\Templates\OpenSSLPemTemplate;
 use DevDeeper\ZATCA\ZATCA;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\Container\CircularDependencyException;
-use Illuminate\Support\Facades\File;
+use Illuminate\Filesystem\Filesystem;
 
 class CSR
 {
+    public function __construct(
+        public ZATCA $zatca,
+        public Filesystem $files,
+        public OpenSSLPemTemplate $pemTemplate,
+        public CSRConfigTemplate $csrTemplate,
+    ) {
+    }
+
     /**
      * Generate Base64 hash of the OpenSSl key.
      *
@@ -34,19 +42,19 @@ class CSR
      */
     protected function generate(CSROptions $options): string
     {
-        File::ensureDirectoryExists(ZATCA::getTempDirectory());
+        $this->files->ensureDirectoryExists($this->zatca->getTempDirectory());
 
-        $privateKeyPath = ZATCA::getTempDirectory(uniqid().'.pem');
-        $csrConfigPath = ZATCA::getTempDirectory(uniqid().'.conf');
+        $privateKeyPath = $this->zatca->getTempDirectory(uniqid().'.pem');
+        $csrConfigPath = $this->zatca->getTempDirectory(uniqid().'.conf');
 
-        app(OpenSSLPemTemplate::class)->build(path: $privateKeyPath);
-        app(CSRConfigTemplate::class)->build(path: $csrConfigPath, options: $options);
+        $this->pemTemplate->build(path: $privateKeyPath);
+        $this->csrTemplate->build(path: $csrConfigPath, options: $options);
 
         $output = Process::run(
             "openssl req -new -sha256 -key $privateKeyPath -config $csrConfigPath"
         );
 
-        File::delete([
+        $this->files->delete([
             $privateKeyPath,
             $csrConfigPath,
         ]);

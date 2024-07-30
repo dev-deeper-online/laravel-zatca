@@ -17,7 +17,7 @@ use Illuminate\Http\Client\RequestException;
 
 trait InteractWithCSID
 {
-    protected ?string $complianceRequestId = null;
+    protected ?int $complianceRequestId = null;
 
     protected ?string $binarySecurityToken = null;
 
@@ -41,7 +41,7 @@ trait InteractWithCSID
         return $this;
     }
 
-    public function setComplianceRequestId(?string $complianceRequestId): self
+    public function setComplianceRequestId(?int $complianceRequestId): self
     {
         $this->complianceRequestId = $complianceRequestId;
 
@@ -62,7 +62,7 @@ trait InteractWithCSID
         return $this;
     }
 
-    public function getComplianceRequestId(): ?string
+    public function getComplianceRequestId(): ?int
     {
         return $this->complianceRequestId;
     }
