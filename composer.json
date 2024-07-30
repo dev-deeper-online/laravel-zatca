@@ -26,12 +26,8 @@
     "require-dev": {
         "laravel/pint": "^1.14",
         "nunomaduro/collision": "^8.1.1||^7.10.0",
-        "larastan/larastan": "^2.9",
         "orchestra/testbench": "^9.0.0||^8.22.0||^6.45.0||^7.43.0",
-        "phpunit/phpunit": "^10.5.17||^9.6.20",
-        "phpstan/extension-installer": "^1.3",
-        "phpstan/phpstan-deprecation-rules": "^1.1",
-        "phpstan/phpstan-phpunit": "^1.3"
+        "phpunit/phpunit": "^10.5.17||^9.6.20"
     },
     "autoload": {
         "psr-4": {
@@ -58,26 +54,18 @@
             "@composer run build",
             "@php vendor/bin/testbench serve"
         ],
-        "analyse": "vendor/bin/phpstan analyse",
-        "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage",
         "format": "vendor/bin/pint"
     },
     "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "pestphp/pest-plugin": true,
-            "phpstan/extension-installer": true
-        }
+        "sort-packages": true
     },
     "extra": {
         "laravel": {
             "providers": [
                 "DevDeeper\\ZATCA\\ZATCAServiceProvider"
-            ],
-            "aliases": {
-                "ZATCA": "DevDeeper\\ZATCA\\Facades\\ZATCA"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",
