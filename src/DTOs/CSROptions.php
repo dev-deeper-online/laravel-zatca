@@ -22,9 +22,9 @@ class CSROptions
     public function getMode(): string
     {
         return match (ZATCA::getMode()) {
-            EnvironmentMode::PRODUCTION => 'ZATCA-Code-Signing',
             EnvironmentMode::SIMULATION => 'PREZATCA-Code-Signing',
             EnvironmentMode::SANDBOX => 'TSTZATCA-Code-Signing',
+            default => 'ZATCA-Code-Signing',
         };
     }
 }
