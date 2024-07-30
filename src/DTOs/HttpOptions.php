@@ -11,6 +11,6 @@ class HttpOptions
         public string $path,
         public array $body = [],
         public array $headers = [],
-        public array|bool $authenticated = true,
+        public bool $authenticated = true,
     ) {}
 }

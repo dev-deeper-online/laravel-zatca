@@ -7,6 +7,7 @@ namespace DevDeeper\ZATCA\Http;
 use DevDeeper\ZATCA\DTOs\CSIDOptions;
 use DevDeeper\ZATCA\DTOs\HttpOptions;
 use DevDeeper\ZATCA\Exceptions\InvalidBaseURLException;
+use DevDeeper\ZATCA\Exceptions\InvalidHttpResponse;
 use DevDeeper\ZATCA\Exceptions\InvalidModeException;
 use DevDeeper\ZATCA\Signing\CSR;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -25,6 +26,7 @@ class CSID extends Client
      * @throws InvalidBaseURLException
      * @throws InvalidModeException
      * @throws RequestException
+     * @throws InvalidHttpResponse
      */
     public function issue(CSIDOptions $options): void
     {
@@ -46,7 +48,11 @@ class CSID extends Client
             $this->zatca->setComplianceRequestId($data['requestID']);
             $this->zatca->setBinarySecurityToken($data['binarySecurityToken']);
             $this->zatca->setSecret($data['secret']);
+
+            return;
         }
+
+        throw new InvalidHttpResponse;
     }
 
     /**

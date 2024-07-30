@@ -34,4 +34,23 @@ class Invoice extends Client
             ],
         ));
     }
+
+    /**
+     * @throws InvalidModeException
+     * @throws InvalidBaseURLException
+     * @throws ConnectionException
+     * @throws RequestException
+     */
+    public function check(InvoiceData $invoice): void
+    {
+        $this->request(new HttpOptions(
+            method: 'post',
+            path: 'compliance/invoices',
+            body: [
+                'uuid' => $invoice->uuid,
+                'invoiceHash' => $invoice->invoiceHash,
+                'invoice' => $invoice->base64,
+            ],
+        ));
+    }
 }

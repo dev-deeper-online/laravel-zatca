@@ -8,6 +8,7 @@ use DevDeeper\ZATCA\DTOs\CSIDOptions;
 use DevDeeper\ZATCA\DTOs\CSROptions;
 use DevDeeper\ZATCA\DTOs\EnvironmentMode;
 use DevDeeper\ZATCA\Exceptions\InvalidBaseURLException;
+use DevDeeper\ZATCA\Exceptions\InvalidHttpResponse;
 use DevDeeper\ZATCA\Exceptions\InvalidModeException;
 use DevDeeper\ZATCA\Http\CSID;
 use Illuminate\Contracts\Container\BindingResolutionException;
@@ -86,6 +87,7 @@ trait InteractWithCSID
      * @throws CircularDependencyException
      * @throws ConnectionException
      * @throws RequestException
+     * @throws InvalidHttpResponse
      */
     protected function issueCSID(): void
     {
