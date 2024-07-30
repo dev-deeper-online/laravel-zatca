@@ -1,0 +1,12 @@
+{
+    "preset": "laravel",
+    "rules": {
+        "simplified_null_return": true,
+        "line_ending": false,
+        "declare_strict_types": true,
+        "new_with_braces": {
+            "anonymous_class": false,
+            "named_class": false
+        }
+    }
+}
