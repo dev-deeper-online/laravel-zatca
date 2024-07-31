@@ -43,13 +43,21 @@ abstract class Client
             );
         }
 
-        $response = $client->send(
-            method: $options->method,
-            url: $options->path,
-            options: [
-                'json' => $options->body,
-            ]
-        )->throw();
+        try {
+            $response = $client->send(
+                method: $options->method,
+                url: $options->path,
+                options: [
+                    'json' => $options->body,
+                ]
+            )->throw();
+        } catch (RequestException $e) {
+            logger('ERROR with: '.$options->path, [
+                'body' => $e->response->json(),
+            ]);
+
+            throw $e;
+        }
 
         return $response->json();
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace DevDeeper\ZATCA\Templates;
 
 use Illuminate\Filesystem\Filesystem;
@@ -15,4 +17,13 @@ abstract class Template
      */
     abstract protected function getStub(): string;
 
+    /**
+     * Resolve the fully-qualified path to the stub.
+     */
+    protected function resolveStubPath(string $stub): string
+    {
+        return $this->files->exists($customPath = base_path(trim($stub, '/')))
+            ? $customPath
+            : __DIR__.'/../..'.$stub;
+    }
 }

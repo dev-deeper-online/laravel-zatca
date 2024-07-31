@@ -26,8 +26,8 @@ class Invoice extends Client
             path: 'invoices/reporting/single',
             body: [
                 'uuid' => $invoice->uuid,
-                'invoiceHash' => $invoice->invoiceHash,
-                'invoice' => $invoice->base64,
+                'invoiceHash' => '',
+                'invoice' => $invoice->toBase64(),
             ],
             headers: [
                 'Clearance-Status' => $invoice->cleared,
@@ -48,8 +48,8 @@ class Invoice extends Client
             path: 'compliance/invoices',
             body: [
                 'uuid' => $invoice->uuid,
-                'invoiceHash' => $invoice->invoiceHash,
-                'invoice' => $invoice->base64,
+                'invoiceHash' => '',
+                'invoice' => $invoice->toBase64(),
             ],
         ));
     }

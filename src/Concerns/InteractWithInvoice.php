@@ -27,6 +27,6 @@ trait InteractWithInvoice
     {
         $this->issueCSID();
 
-        app(Invoice::class)->issue($invoice);
+        app(Invoice::class)->check($invoice);
     }
 }
